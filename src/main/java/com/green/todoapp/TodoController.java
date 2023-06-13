@@ -1,8 +1,6 @@
 package com.green.todoapp;
 
-import com.green.todoapp.model.TodoInsDto;
-import com.green.todoapp.model.TodoSelDto;
-import com.green.todoapp.model.TodoVo;
+import com.green.todoapp.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.models.links.Link;
 import jakarta.validation.constraints.Min;
@@ -43,5 +41,11 @@ public class TodoController {
 //        return service.selTodo(dto);
 //    }
 
+    @PatchMapping("/{itodo}")
+    public int finishTodo(@RequestParam int itodo) {
+        TodoEntity entity = new TodoEntity();
+        entity.setItodo(itodo);
+        return service.finishTodo(entity);
+    }
 
 }

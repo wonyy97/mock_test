@@ -1,9 +1,6 @@
 package com.green.todoapp;
 
-import com.green.todoapp.model.TodoEntity;
-import com.green.todoapp.model.TodoInsDto;
-import com.green.todoapp.model.TodoSelDto;
-import com.green.todoapp.model.TodoVo;
+import com.green.todoapp.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,4 +37,10 @@ public class TodoService {
 //        List<TodoVo> list = mapper.selTodo(dto);
 //        return list;
 //    }
+
+    public int finishTodo(TodoEntity entity) {
+
+        return mapper.finishTodo(entity);
+    }
+
 }

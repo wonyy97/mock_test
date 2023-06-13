@@ -12,11 +12,18 @@
     </insert>
 
     <select id="selTodo">
-        SELECT itodo, ctnt, created_at createdAt, pic
+        SELECT itodo, ctnt, created_at createdAt, pic,
+                finish_yn finishYn, finished_at finishedAt
         FROM t_todo
         WHERE del_yn = 0
         LIMIT #{startIdx}, #{row}
-
     </select>
+
+    <update id="finishTodo">
+        UPDATE t_todo
+        SET finish_yn = 1,
+        finished_at = current_timestamp()
+        WHERE itodo = #{itodo}
+    </update>
 
 </mapper>

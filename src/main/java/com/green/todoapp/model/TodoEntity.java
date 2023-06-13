@@ -9,5 +9,6 @@ public class TodoEntity {
     private String createdAt;
     private int delYn;
     private String pic;
-
+    private int finishYn;
+    private String finishedAt;
 }

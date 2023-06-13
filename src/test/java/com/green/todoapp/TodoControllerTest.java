@@ -72,8 +72,8 @@ class TodoControllerTest {
         // given - when - then
 
         List<TodoVo> mockList = new ArrayList<>();
-        mockList.add(new TodoVo(1, "테스트", "2023", "null"));
-        mockList.add(new TodoVo(2, "테스트2", "2023", "abc.jpg"));
+        mockList.add(new TodoVo(1, "테스트", "2023",null, 1,"2023-05-11"));
+        mockList.add(new TodoVo(2, "테스트", "2022",null, 0,null));
         given(service.selTodo()).willReturn(mockList);
 
         //when

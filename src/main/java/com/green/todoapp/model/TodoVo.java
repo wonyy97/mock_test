@@ -10,4 +10,6 @@ public class TodoVo {
     private String ctnt;
     private String createdAt;
     private String pic;
+    private int finishYn;
+    private String finishedAt;
 }
