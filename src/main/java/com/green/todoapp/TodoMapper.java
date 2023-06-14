@@ -11,5 +11,6 @@ public interface TodoMapper {
     int insTodo(TodoEntity entity);
     List<TodoVo> selTodo();
     int finishTodo(TodoEntity entity);
+    int finishTrun(TodoEntity entity);
 
 }

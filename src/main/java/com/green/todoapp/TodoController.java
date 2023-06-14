@@ -2,23 +2,17 @@ package com.green.todoapp;
 
 import com.green.todoapp.model.*;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.models.links.Link;
-import jakarta.validation.constraints.Min;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/todo")
 public class TodoController {
 
     private final TodoService service;
-
-    @Autowired
-    public TodoController(TodoService service) {
-        this.service = service;
-    }
 
     @PostMapping
     @Operation(summary = "할 일 등록")
@@ -41,11 +35,16 @@ public class TodoController {
 //        return service.selTodo(dto);
 //    }
 
-    @PatchMapping("/{itodo}")
-    public int finishTodo(@RequestParam int itodo) {
-        TodoEntity entity = new TodoEntity();
-        entity.setItodo(itodo);
-        return service.finishTodo(entity);
+    //    @PatchMapping("/{itodo}")
+//    @Operation(summary = "완료")
+//    public int finishTodo(@RequestParam int itodo) {
+//        TodoEntity entity = new TodoEntity();
+//        entity.setItodo(itodo);
+//        return service.finishTodo(entity);
+//    }
+    @PatchMapping
+    public int patchTodo(@RequestBody TodoFinishDto dto) {
+        return service.finishTodo(dto);
     }
 
 }

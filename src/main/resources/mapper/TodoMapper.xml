@@ -16,14 +16,26 @@
                 finish_yn finishYn, finished_at finishedAt
         FROM t_todo
         WHERE del_yn = 0
-        LIMIT #{startIdx}, #{row}
+
+    </select>
+
+    <select id="finishTrun" resultType="int">
+        SELECT finish_yn
+        FROM t_todo
+        WHERE itodo = #{itodo}
     </select>
 
     <update id="finishTodo">
+        <selectKey keyProperty="finishYn" resultType="TodoEntity" order="AFTER">
+            SELECT finish_yn FROM t_todo WHERE itodo = #{itodo}
+        </selectKey>
+
         UPDATE t_todo
-        SET finish_yn = 1,
-        finished_at = current_timestamp()
+        SET finish_yn = 1 - finish_yn
+        , finished_at = if(finished_at is NULL, CURRENT_TIMESTAMP(), NULL)
         WHERE itodo = #{itodo}
     </update>
+
+
 
 </mapper>

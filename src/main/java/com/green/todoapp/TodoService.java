@@ -1,19 +1,16 @@
 package com.green.todoapp;
 
 import com.green.todoapp.model.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor // @Autowired 한 생성자를 만들지 않아도 롬복에서 처리해 줌!
 public class TodoService {
     private final TodoMapper mapper;
-
-    @Autowired
-    public TodoService(TodoMapper mapper) {
-        this.mapper = mapper;
-    }
 
     public int insTodo(TodoInsDto dto) {
         TodoEntity entity = new TodoEntity();
@@ -38,9 +35,24 @@ public class TodoService {
 //        return list;
 //    }
 
-    public int finishTodo(TodoEntity entity) {
 
-        return mapper.finishTodo(entity);
+    public int finishTodo(TodoFinishDto dto) {
+        TodoEntity entity = new TodoEntity();
+        entity.setItodo(dto.getItodo());
+
+        int result = mapper.finishTodo(entity);
+        System.out.println(entity.getFinishYn());
+        return entity.getFinishYn();
+
+//        int finish = mapper.finishTrun(entity);
+//        entity.setItodo(entity.getItodo());
+//
+//        if(finish == 0) {
+//            entity.setFinishYn(1);
+//        } else {
+//            entity.setFinishYn(0);
+//        }
+//        return mapper.finishTodo(entity);
     }
 
 }
