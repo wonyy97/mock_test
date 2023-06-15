@@ -83,18 +83,13 @@ class TodoServiceTest {
     @Test
     @DisplayName("TODO - 삭제")
     void delTodo() {
-        TodoDelUpdDto dto = new TodoDelUpdDto();
-        dto.setItodo(1);
-        TodoEntity entity = new TodoEntity();
-        entity.setDelYn(1);
-        entity.setItodo(dto.getItodo());
+        int expectedResult = 1;
+        when(mapper.delTodo(any(TodoEntity.class))).thenReturn(expectedResult);
+        int result = service.delTodo(anyInt());
 
-        when(mapper.finishTodo(any(TodoEntity.class))).thenReturn(1);
-        int result = service.delTodo(dto);
+        assertEquals(expectedResult,result);
 
-        assertEquals(0,result);
-
-        verify(mapper).delTodo(any());
+        verify(mapper).delTodo(any(TodoEntity.class));
     }
 
 }
