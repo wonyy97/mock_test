@@ -16,18 +16,17 @@
                 finish_yn finishYn, finished_at finishedAt
         FROM t_todo
         WHERE del_yn = 0
-
     </select>
 
-    <select id="finishTrun" resultType="int">
-        SELECT finish_yn
-        FROM t_todo
-        WHERE itodo = #{itodo}
-    </select>
+<!--    <select id="finishTrun" resultType="int">-->
+<!--        SELECT finish_yn-->
+<!--        FROM t_todo-->
+<!--        WHERE itodo = 샵{itodo}-->
+<!--    </select>-->
 
     <update id="finishTodo">
         <selectKey keyProperty="finishYn" resultType="TodoEntity" order="AFTER">
-            SELECT finish_yn FROM t_todo WHERE itodo = #{itodo}
+            SELECT finish_yn finishYn FROM t_todo WHERE itodo = #{itodo}
         </selectKey>
 
         UPDATE t_todo
@@ -36,6 +35,12 @@
         WHERE itodo = #{itodo}
     </update>
 
+
+    <update id="delTodo">
+        UPDATE t_todo
+        SET del_yn = 1
+        WHERE itodo = #{itodo}
+    </update>
 
 
 </mapper>

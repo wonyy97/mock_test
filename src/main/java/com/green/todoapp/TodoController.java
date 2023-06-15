@@ -43,8 +43,14 @@ public class TodoController {
 //        return service.finishTodo(entity);
 //    }
     @PatchMapping
+    @Operation(summary = "토글")
     public int patchTodo(@RequestBody TodoFinishDto dto) {
         return service.finishTodo(dto);
     }
 
+    @DeleteMapping
+    @Operation(summary = "삭제처리")
+    public int delTodo(@RequestParam int itodo) {
+        return service.delTodo(itodo);
+    }
 }

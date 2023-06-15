@@ -2,7 +2,6 @@ package com.green.todoapp;
 
 import com.green.todoapp.model.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,5 +53,12 @@ public class TodoService {
 //        }
 //        return mapper.finishTodo(entity);
     }
+
+    public int delTodo(int itodo) {
+        TodoEntity entity = new TodoEntity();
+        entity.setItodo(itodo);
+        return mapper.delTodo(entity);
+    }
+
 
 }

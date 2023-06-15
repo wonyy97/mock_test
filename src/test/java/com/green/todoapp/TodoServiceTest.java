@@ -1,12 +1,12 @@
 package com.green.todoapp;
 
-import com.green.todoapp.model.TodoEntity;
-import com.green.todoapp.model.TodoInsDto;
-import com.green.todoapp.model.TodoVo;
+import com.google.gson.Gson;
+import com.green.todoapp.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
+@WebMvcTest(TodoService.class)
 @ExtendWith(SpringExtension.class) //단독으로 빈 등록 하는 것
 @Import({TodoService.class}) //
 class TodoServiceTest {
@@ -46,6 +46,7 @@ class TodoServiceTest {
     }
 
     @Test
+    @DisplayName("TodoService - Todo 리스트 가져오기")
     void selTodo() {
 
         List<TodoVo> mockList = new ArrayList<>();
@@ -60,6 +61,40 @@ class TodoServiceTest {
 //        assertEquals(mockList.size(), result.size());
 
         verify(mapper).selTodo();
-
     }
+
+    @Test
+    @DisplayName("TODO - 완료처리 토글")
+    void finishTodo() {
+        TodoFinishDto dto = new TodoFinishDto();
+        dto.setItodo(1);
+        TodoEntity entity = new TodoEntity();
+        entity.setFinishYn(1);
+        entity.setItodo(dto.getItodo());
+
+        when(mapper.finishTodo(entity)).thenReturn(1);
+        int result = service.finishTodo(dto);
+
+        assertEquals(0,result);
+
+        verify(mapper).finishTodo(any());
+    }
+
+    @Test
+    @DisplayName("TODO - 삭제")
+    void delTodo() {
+        TodoDelUpdDto dto = new TodoDelUpdDto();
+        dto.setItodo(1);
+        TodoEntity entity = new TodoEntity();
+        entity.setDelYn(1);
+        entity.setItodo(dto.getItodo());
+
+        when(mapper.finishTodo(any(TodoEntity.class))).thenReturn(1);
+        int result = service.delTodo(dto);
+
+        assertEquals(0,result);
+
+        verify(mapper).delTodo(any());
+    }
+
 }
