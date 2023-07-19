@@ -32,7 +32,7 @@ class TodoMapperTest {
         System.out.println(entity.getItodo());
 
 
-        assertEquals(5, entity.getItodo());
+        assertEquals(5, entity.getItodo()); //pk값이 잘 넘어 왔는지 확인
         assertEquals(1, result);
 
     }
